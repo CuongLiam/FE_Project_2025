@@ -1,0 +1,138 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #080f1a;
+  font-family: "Arial", sans-serif;
+}
+a {
+  color: #00eaff;
+  text-decoration: none;
+}
+p{
+  color: rgba(255, 255, 255, 0.7);
+}
+/* error */
+#login-username-error, #login-password-error,
+#reg-username-error, #reg-password-error,
+#reg-email-error, #reg-confirm-password-error {
+  
+  color: #fd6070;
+}
+
+/* Wrapper for forms */
+.wrapper {
+  position: relative;
+  width: 420px;
+  height: 570px; /* explicit height so container is visible */
+  background: #111c2a;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+/* Common form-box styles */
+.form-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px;
+  transition: transform 0.6s ease;
+  backface-visibility: hidden;
+}
+.form-box h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.input-box {
+  position: relative;
+  margin: 20px 0;
+}
+.input-box input {
+  width: 100%;
+  padding: 10px 40px 10px 10px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  color: #fff;
+  outline: none;
+  font-size: 16px;
+}
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: 0.3s;
+}
+
+/* very cool */
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 12px;
+  color: #00eaff;
+}
+
+.input-box i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+}
+.btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 25px;
+  background: #00eaff;
+  color: #111c2a;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn:hover {
+  background: #00c8e0;
+}
+.login-register {
+  text-align: center;
+  margin-top: 20px;
+  color: #fff;
+}
+
+/* Position login/register boxes */
+.login {
+  z-index: 2;
+}
+.register {
+  transform: translateX(100%);
+}
+.wrapper.active .login {
+  transform: translateX(-100%);
+}
+.wrapper.active .register {
+  transform: translateX(0);
+  z-index: 2;
+}
+
+/* Animation classes */
+.animation {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

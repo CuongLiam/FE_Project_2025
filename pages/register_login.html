@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuizzForge</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/register_login.css" />
+  </head>
+  <body>
+    <div class="wrapper" id="wrapper">
+      <!-- Login Form -->
+      <div class="form-box login">
+        <h2 class="animation" style="--i: 1">Login</h2>
+        <p class="animation" style="--i: 2">
+          &nbsp;QuizForge is an interactive online quiz platform that lets you easily
+          design, share, and take quizzes quickly and effectively!
+        </p>
+        <div class="input-box animation" style="--i: 2">
+          <input type="text" placeholder=" " required id="login-username"/>
+          <label>Username</label>
+          <i class="bx bx-user"></i>
+          <p id="login-username-error"></p>
+        </div>
+        <div class="input-box animation" style="--i: 3">
+          <input type="password" placeholder=" " required id="login-password"/>
+          <label>Password</label>
+          <i class="bx bx-lock-alt"></i>
+          <p id="login-password-error"></p>
+        </div>
+        <button id="login-btn" class="btn animation" style="--i: 4">Login</button>
+        <div class="login-register animation" style="--i: 5">
+          <p>
+            Don't have an account?
+            <a href="#" class="register-link">Register</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Registration Form -->
+      <div class="form-box register">
+        <h2 class="animation" style="--i: 1">Register</h2>
+        <p class="animation" style="--i: 2">
+          QuizForge is an interactive online quiz platform that lets you easily
+          design, share, and take quizzes quickly and effectively!
+        </p>
+        <div class="input-box animation" style="--i: 2">
+          <input type="text" placeholder="" required id="reg-username"/>
+          <label>Username</label>
+          <i class="bx bx-user"></i>
+          <p id="reg-username-error"></p>
+        </div>
+        <div class="input-box animation" style="--i: 3">
+          <input type="email" placeholder="" required id="reg-email"/>
+          <label>Email</label>
+          <i class="bx bx-envelope"></i>
+          <p id="reg-email-error"></p>
+        </div>
+        <div class="input-box animation" style="--i: 4">
+          <input type="password" placeholder="" required id="reg-password"/>
+          <label>Password</label>
+          <i class="bx bx-lock-alt"></i>
+          <p id="reg-password-error"></p>
+        </div>
+        <div class="input-box animation" style="--i: 4">
+          <input type="password" placeholder="" required id="reg-confirm-password"/>
+          <label>Confirm Password</label>
+          <i class="bx bx-lock-alt"></i>
+          <p id="reg-confirm-password-error"></p>
+        </div>
+        <button id="reg-btn" class="btn animation" style="--i: 5">Register</button>
+        <div class="login-register animation" style="--i: 6">
+          <p>
+            Already have an account? <a href="#" class="login-link">Login</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/register.js"></script>
+  </body>
+</html>

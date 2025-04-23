@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/home.css">
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <header>
+      <nav
+        class="navbar navbar-expand-lg bg-body-tertiary"
+        data-bs-theme="dark"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="flex-grow-1">
+      <!-- Means: “Let me grow as much as I can within this flex container.”
+            It pushes the footer down to the bottom of the screen 
+            if there's not enough content to do so naturally. -->
+      <div
+        class="container mt-5 pb-3 text-center border-bottom border-1 border-dark"
+      >
+        <h1>Welcome to QuizzForge</h1>
+        <p>Your one-stop solution for creating and taking quizzes.</p>
+        <button class="btn btn-success">Take random quizzes</button>
+      </div>
+
+      <div class="container mt-5">
+        <!-- Header + Sort Controls -->
+        <!-- <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
+              <h4 class="mb-3 mb-md-0">⭐ Featured Quizzes</h4>
+              <div>
+                <small class="md-2">Sort by:</small>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Sort quizzes">
+                  <button type="button" class="btn btn-outline-secondary active">Plays ↑</button>
+                  <button type="button" class="btn btn-outline-secondary">Plays ↓</button>
+                </div>
+              </div>
+            </div> -->
+
+        <div class="row mb-4">
+          <!-- Title centered on top -->
+          <div class="col-12 text-center">
+            <h4 class="mb-3">⭐ Featured Quizzes</h4>
+          </div>
+
+          <!-- Sort controls left-aligned below -->
+          <div class="col-12 col-md-6">
+            <small class="me-2">Sort by:</small>
+            <div
+              class="btn-group btn-group-sm"
+              role="group"
+              aria-label="Sort quizzes"
+            >
+              <button type="button" class="btn btn-outline-secondary active">
+                Plays ↑
+              </button>
+              <button type="button" class="btn btn-outline-secondary">
+                Plays ↓
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quiz Cards Grid -->
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+          <!-- Repeat this .col for each quiz -->
+          <div class="col">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="row g-0 align-items-center">
+                <div class="col-auto">
+                  <img
+                    src="https://via.placeholder.com/100"
+                    class="img-fluid rounded-start"
+                    alt="Quiz thumbnail"
+                    style="width: 100px; height: 100px; object-fit: cover"
+                  />
+                </div>
+                <div class="col px-3">
+                  <small class="text-muted">🏠 Life</small>
+                  <h5 class="card-title mb-1">Test Your Knowledge</h5>
+                  <p class="card-text mb-0">
+                    <small class="text-muted">15 questions · 2 plays</small>
+                  </p>
+                </div>
+                <div class="col-auto pe-3">
+                  <button class="btn btn-warning btn-sm">Play</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end .col -->
+
+          <!-- Example second card -->
+          <div class="col">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="row g-0 align-items-center">
+                <div class="col-auto">
+                  <img
+                    src="https://via.placeholder.com/100"
+                    class="img-fluid rounded-start"
+                    alt="Quiz thumbnail"
+                    style="width: 100px; height: 100px; object-fit: cover"
+                  />
+                </div>
+                <div class="col px-3">
+                  <small class="text-muted">🏠 Life</small>
+                  <h5 class="card-title mb-1">Test Your Knowledge</h5>
+                  <p class="card-text mb-0">
+                    <small class="text-muted">15 questions · 1 play</small>
+                  </p>
+                </div>
+                <div class="col-auto pe-3">
+                  <button class="btn btn-warning btn-sm">Play</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end .col -->
+
+          <!-- add more .col as needed… -->
+        </div>
+        <!-- end .row -->
+
+        <!-- Pagination -->
+        <nav aria-label="Quiz page navigation" class="mt-4">
+          <ul class="pagination justify-content-center mb-0">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1"> &lt;</a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">&gt;</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-2">
+        <!-- pad Y -->
+      © 2025 QuizForge. All rights reserved.
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
