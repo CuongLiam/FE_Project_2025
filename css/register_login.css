@@ -17,8 +17,28 @@ p{
 #login-username-error, #login-password-error,
 #reg-username-error, #reg-password-error,
 #reg-email-error, #reg-confirm-password-error {
-  
+  margin-bottom: 5px;
   color: #fd6070;
+}
+/* Make the registration form scrollable */
+.form-box.register {
+  max-height: 100%; /* Ensure it doesn't exceed the wrapper height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 15px; /* Add padding to avoid scrollbar overlap */
+}
+
+/* scrollbar style */
+.form-box.register::-webkit-scrollbar {
+  width: 5px;
+}
+
+.form-box.register::-webkit-scrollbar-thumb {
+  background: #080f1a;
+  border-radius: 4px;
+}
+
+.form-box.register::-webkit-scrollbar-thumb:hover {
+  background: #d8dadc;
 }
 
 /* Wrapper for forms */
