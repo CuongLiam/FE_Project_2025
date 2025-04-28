@@ -8,6 +8,16 @@ let users  = [
   }
 ];
 
+let admins = [
+  {
+    id : 1,
+    fullname : "admin",
+    email : "admin@gmail.com",
+    password : "1234",
+    role : "admin"
+  }
+]
+
 // let userExample = {
 //   id : 1,
 //   fullname : "Josh Liam",
@@ -16,6 +26,10 @@ let users  = [
 //   role : "user"
 // }
 // users.push(userExample);
+
+console.log(users);
+console.log(admins);
+
 
 const wrapper = document.getElementById("wrapper");
 
@@ -50,24 +64,39 @@ const regConfirmPasswordError = document.getElementById(
 //     login
 loginBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const username = loginUsername.value;
-  const password = loginPassword.value;
+  const username = loginUsername.value.trim();
+  const password = loginPassword.value.trim();
 
   let isValid = true;
-  if (username.trim() === "") {
+  if (username === "") {
     usernameError.innerText = `Please fill out your name`;
     isValid = false;
   } else {
     usernameError.innerText = "";
   }
-  if (password.trim() === "") {
+  if (password === "") {
     passwordError.innerText = `Please fill out your password`;
     isValid = false;
   } else {
     passwordError.innerText = "";
   }
   if (isValid) {
-    window.location.href = "home.html"; // Redirect to home.html
+    // decentralization
+    // check if the user belongs to admins or users
+    const user = users.find(
+      (user)=> user.fullname === username && user.password === password
+    );
+    const admin = admins.find(
+      (admin)=> admin.fullname === username && admin.password === password
+    );
+
+    if (user) {
+      window.location.href = "home.html";
+    } else if (admin) {
+      window.location.href = "category_manager.html";
+    } else {
+      usernameError.innerText = `Invalid username or password`;
+    }
   }
 });
 
