@@ -32,7 +32,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#">Categories</a>
+                <a class="nav-link" href="./category_manager.html">Categories</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#"
@@ -40,7 +40,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Logout</a>
+                <a class="nav-link" href="./register_login.html" id="logout-btn">Logout</a>
               </li>
             </ul>
           </div>
@@ -161,5 +161,9 @@
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
+    <script src="../js/auth.js"></script>
+    <script>
+      checkLoginStatus(); // Check login status on page load
+    </script>
   </body>
 </html>

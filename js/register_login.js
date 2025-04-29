@@ -1,22 +1,40 @@
+const saveToLocalStorage = () =>{
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("admins", JSON.stringify(admins));
+}
+
+const loadFromLocalStorage = () => {
+  const usersData = localStorage.getItem("users");
+  const adminsData = localStorage.getItem("admins");
+  if(usersData){
+    users = JSON.parse(usersData);
+  } else return null;
+  if(adminsData){
+    admins = JSON.parse(adminsData);
+  } else return null;
+}
+
 let users  = [
-  {
-    id : 1,
-    fullname : "Josh Liam",
-    email : "abc@gmail.com",
-    password : "1234",
-    role : "user"
-  }
+  // {
+  //   id : 1,
+  //   fullname : "Josh Liam",
+  //   email : "abc@gmail.com",
+  //   password : "1234",
+  //   role : "user"
+  // }
 ];
 
 let admins = [
-  {
-    id : 1,
-    fullname : "admin",
-    email : "admin@gmail.com",
-    password : "1234",
-    role : "admin"
-  }
-]
+  // {
+  //   id : 1,
+  //   fullname : "admin",
+  //   email : "admin@gmail.com",
+  //   password : "1234",
+  //   role : "admin"
+  // }
+];
+
+loadFromLocalStorage();
 
 // let userExample = {
 //   id : 1,
@@ -91,8 +109,12 @@ loginBtn.addEventListener("click", (e) => {
     );
 
     if (user) {
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userRole", "user"); // Save role if needed
       window.location.href = "home.html";
     } else if (admin) {
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userRole", "admin");
       window.location.href = "category_manager.html";
     } else {
       usernameError.innerText = `Invalid username or password`;
@@ -100,7 +122,7 @@ loginBtn.addEventListener("click", (e) => {
   }
 });
 
-//    register
+//  **register
 regBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const username = regUsername.value.trim();
@@ -179,6 +201,8 @@ regBtn.addEventListener("click", (e) => {
     });
   }
   console.log(users);
+
+  saveToLocalStorage();
 });
 
 // Email validation function

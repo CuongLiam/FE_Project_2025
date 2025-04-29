@@ -37,10 +37,10 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Quizzes</a>
+                <a class="nav-link" href="./quizzes_manager.html">Quizzes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Logout</a>
+                <a class="nav-link" href="./register_login.html" id="logout-btn">Logout</a>
               </li>
             </ul>
           </div>
@@ -117,7 +117,7 @@
       </nav>
       
 
-<!-- Modal -->
+<!-- Add category Modal -->
 <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -206,5 +206,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="../js/category_manager.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+      checkLoginStatus(); // Check login status on page load
+    </script>
   </body>
 </html>
