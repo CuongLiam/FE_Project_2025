@@ -1,3 +1,18 @@
 body{
     background-color: #f4f4f4;
 }
+
+.navbar-brand {
+    font-family: 'MyFont', sans-serif; /* Fallback to sans-serif */
+    font-size: 1.5rem; /* Adjust size if needed */
+    font-weight: bold; /* Optional */
+}
+
+@font-face {
+    font-family: 'MyFont';
+    src: url('../assets/fonts/MyFont.woff2') format('woff2'),
+         url('../assets/fonts/MyFont.woff') format('woff'),
+         url('../assets/fonts/MyFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
