@@ -111,27 +111,26 @@
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Add category</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            <label for="addCategoryName" class="form-label">Category name</label>
+            <input type="text" class="form-control" id="addCategoryName">
+            <div id="add_name_error"></div>
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Emoji</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="addCategoryEmoji" class="form-label">Emoji</label>
+            <input type="text" class="form-control" id="addCategoryEmoji">
+            <div id="add_emoji_error"></div>
           </div>
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-success" id="btn-submit-add">Add</button>
       </div>
     </div>
   </div>
 </div>
 
     <!-- Edit modal -->
-     <!-- Add this below the "Add Category" modal -->
 <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -143,17 +142,19 @@
         <form>
           <div class="mb-3">
             <label for="editCategoryName" class="form-label">Category Name</label>
-            <input type="text" class="form-control" id="editCategoryName" placeholder="Enter category name">
+            <input type="text" class="form-control" id="editCategoryName">
+            <div id="edit_name_error"></div>
           </div>
           <div class="mb-3">
             <label for="editCategoryEmoji" class="form-label">Emoji</label>
-            <input type="text" class="form-control" id="editCategoryEmoji" placeholder="Enter emoji">
+            <input type="text" class="form-control" id="editCategoryEmoji">
+            <div id="edit_emoji_error"></div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-warning" id="btn-submit-edit">Save changes</button>
       </div>
     </div>
   </div>
@@ -171,7 +172,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
       </div>
     </div>
   </div>

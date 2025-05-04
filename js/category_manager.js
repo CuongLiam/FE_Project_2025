@@ -48,49 +48,222 @@ const renderCategories = () => {
     `;
     tbody.appendChild(row);
   });
+
+  // Add event listeners for edit and delete buttons after rendering
+  addEditButtonListeners();
+  addDeleteButtonListeners();
 };
 
+// edit ==============
+// Function to add event listeners to edit buttons
+const addEditButtonListeners = () => {
+  document.querySelectorAll(".btn-edit").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const row = e.target.closest("tr"); // Get the closest table row
+      const categoryId = row.querySelector("th").textContent.trim(); // Get category ID
+      const categoryName = row.querySelector("td:nth-child(2)").textContent.trim(); // Get category name
+      const categoryEmoji = categoryName.split(" ")[0]; // Extract emoji (assuming it's the first part)
+
+      // Populate modal fields
+      document.getElementById("editCategoryName").value = categoryName
+        .replace(categoryEmoji, "")
+        .trim();
+      document.getElementById("editCategoryEmoji").value = categoryEmoji;
+
+      // Store the category ID in the modal's data attribute
+      document.getElementById("editCategoryModal").setAttribute("data-category-id", categoryId);
+    });
+  });
+};
 // Load categories when DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
   renderCategories();
 });
 
-// edit buttons
-document.querySelectorAll(".btn-edit").forEach((button) => {
-  button.addEventListener("click", (e) => {
-    const row = e.target.closest("tr"); // Get the closest table row
-    const categoryName = row
-      .querySelector("td:nth-child(2)")
-      .textContent.trim(); // Get category name
-    const categoryEmoji = categoryName.split(" ")[0]; // Extract emoji (assuming it's the first part)
 
-    console.log(categoryEmoji);
-    // Populate modal fields
-    document.getElementById("editCategoryName").value = categoryName
-      .replace(categoryEmoji, "")
-      .trim();
-    document.getElementById("editCategoryEmoji").value = categoryEmoji;
-    
+const submitEditCategory = () => {
+  const editCategoryName = document.getElementById("editCategoryName").value.trim();
+  const editCategoryEmoji = document.getElementById("editCategoryEmoji").value.trim();
+  const editNameError = document.getElementById("edit_name_error");
+  const editEmojiError = document.getElementById("edit_emoji_error");
+
+  let isValid = true;
+
+  // Clear prev error messages
+  editNameError.innerText = "";
+  editEmojiError.innerText = "";
+
+  // Validation: Ensure the category name is not empty
+  if (!editCategoryName) {
+    editNameError.innerText = "Tên danh mục không được để trống.";
+    editNameError.style.color = "red";
+    isValid = false;
+  }
+
+  // Validation: Ensure the category name is unique (excluding the current category being edited)
+  const categoryId = document.getElementById("editCategoryModal").getAttribute("data-category-id");
+  const isDuplicate = categories.some(
+    (category) =>
+      category.categoryName.toLowerCase() === editCategoryName.toLowerCase() &&
+      category.id !== parseInt(categoryId)
+  );
+  if (isDuplicate) {
+    editNameError.innerText = "Tên danh mục không được trùng nhau.";
+    editNameError.style.color = "red";
+    isValid = false;
+  }
+
+  // Validation: Ensure the category name has a minimum length
+  if (editCategoryName.length < 3) {
+    editNameError.innerText = "Tên danh mục phải có ít nhất 3 ký tự.";
+    editNameError.style.color = "red";
+    isValid = false;
+  }
+
+  // Validation: Ensure the emoji is not empty
+  if (!editCategoryEmoji) {
+    editEmojiError.innerText = "Emoji không được để trống.";
+    editEmojiError.style.color = "red";
+    isValid = false;
+  }
+
+  // Validation: Ensure the emoji has a minimum length
+  if (editCategoryEmoji.length < 1) {
+    editEmojiError.innerText = "Emoji phải có ít nhất 1 ký tự.";
+    editEmojiError.style.color = "red";
+    isValid = false;
+  }
+
+  if (isValid) {
+    // Find the category to edit using the ID stored in the modal's data attribute
+    const categoryIndex = categories.findIndex((category) => category.id === parseInt(categoryId));
+
+    if (categoryIndex !== -1) {
+      // Update the category in the array
+      categories[categoryIndex].categoryName = editCategoryName;
+      categories[categoryIndex].categoryEmoji = editCategoryEmoji;
+
+      // Re-render the categories table
+      renderCategories();
+
+      // Hide the modal
+      const editModal = bootstrap.Modal.getInstance(document.getElementById("editCategoryModal"));
+      editModal.hide();
+    }
+  }
+};
+
+// Attach event listener to the "Save changes" button in the edit modal
+document.getElementById("btn-submit-edit").addEventListener("click", submitEditCategory);
+
+//delete categoroy ================
+const deleteCategory = () => {
+  // Get the category ID stored in the modal's data attribute
+  const categoryId = document.getElementById("deleteCategoryModal").getAttribute("data-category-id");
+  const categoryIndex = categories.findIndex((category) => category.id === parseInt(categoryId));
+
+  if (categoryIndex !== -1) {
+    categories.splice(categoryIndex, 1);
+
+    // Reassign IDs to ensure they are sequential
+    categories.forEach((category, idx) => {
+      category.id = idx + 1; // IDs start from 1
+    });
+
+    renderCategories();
+
+    const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deleteCategoryModal"));
+    deleteModal.hide();
+  }
+};
+
+const addDeleteButtonListeners = () => {
+  document.querySelectorAll(".btn-delete").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const row = e.target.closest("tr");
+      const categoryId = row.querySelector("th").textContent.trim();
+
+      // Store the category ID in the modal's data attribute
+      document.getElementById("deleteCategoryModal").setAttribute("data-category-id", categoryId);
+    });
   });
-});
+};
 
-// //delete buttons
-// let categoryToDelete = null;
+document.getElementById("confirmDeleteBtn").addEventListener("click", deleteCategory);
 
-// // Add event listener to all delete buttons
-// document.querySelectorAll(".btn-delete").forEach((button) => {
-//   button.addEventListener("click", (e) => {
-//     const row = e.target.closest("tr"); // Get the closest table row
-//     categoryToDelete = row; // Store the row to delete
-//   });
-// });
+// add =================
+const addCategory = () => {
+  const addCategoryName = document.getElementById("addCategoryName").value.trim();
+  const addCategoryEmoji = document.getElementById("addCategoryEmoji").value.trim();
+  const addNameError = document.getElementById("add_name_error");
+  const addEmojiError = document.getElementById("add_emoji_error");
 
-// // Handle delete confirmation
-// document.getElementById("confirmDeleteButton").addEventListener("click", () => {
-//   if (categoryToDelete) {
-//     categoryToDelete.remove(); // Remove the row from the table
-//     categoryToDelete = null; // Reset the variable
-//     const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deleteCategoryModal"));
-//     deleteModal.hide(); // Hide the modal
-//   }
-// });
+  let isValid = true;
+
+  // Clear previous error messages
+  addNameError.innerText = "";
+  addEmojiError.innerText = "";
+
+  // Validation: Ensure the category name is not empty
+  if (!addCategoryName) {
+    addNameError.innerText = "Tên danh mục không được để trống.";
+    addNameError.style.color = "red";
+    isValid = false;
+  }
+
+  // Validation: Ensure the category name is unique
+  const isDuplicate = categories.some(
+    (category) => category.categoryName.toLowerCase() === addCategoryName.toLowerCase()
+  );
+  if (isDuplicate) {
+    addNameError.innerText = "Tên danh mục không được trùng nhau.";
+    addNameError.style.color = "red";
+    isValid = false;
+  }
+
+  // Validation: Ensure the category name has a minimum length
+  if (addCategoryName.length < 3) {
+    addNameError.innerText = "Tên danh mục phải có ít nhất 3 ký tự.";
+    addNameError.style.color = "red";
+    isValid = false;
+  }
+
+  // Validation: Ensure the emoji is not empty
+  if (!addCategoryEmoji) {
+    addEmojiError.innerText = "Emoji không được để trống.";
+    addEmojiError.style.color = "red";
+    isValid = false;
+  }
+
+  // Validation: Ensure the emoji has a minimum length
+  if (addCategoryEmoji.length < 1) {
+    addEmojiError.innerText = "Emoji phải có ít nhất 1 ký tự.";
+    addEmojiError.style.color = "red";
+    isValid = false;
+  }
+
+  if (isValid) {
+    // Create a new category object
+    const newCategory = {
+      id: categories.length + 1, // Assign the next ID
+      categoryName: addCategoryName,
+      categoryEmoji: addCategoryEmoji,
+    };
+
+    // Push the new category to the array
+    categories.push(newCategory);
+
+    // Re-render the categories table
+    renderCategories();
+
+    // Clear the input fields
+    document.getElementById("addCategoryName").value = "";
+    document.getElementById("addCategoryEmoji").value = "";
+
+    // Hide the modal
+    const addModal = bootstrap.Modal.getInstance(document.getElementById("addCategoryModal"));
+    addModal.hide();
+  }
+};
+
+document.getElementById("btn-submit-add").addEventListener("click", addCategory);
