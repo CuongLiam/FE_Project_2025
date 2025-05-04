@@ -6,13 +6,39 @@ const saveToLocalStorage = () =>{
 const loadFromLocalStorage = () => {
   const usersData = localStorage.getItem("users");
   const adminsData = localStorage.getItem("admins");
-  if(usersData){
+
+  if (usersData) {
     users = JSON.parse(usersData);
-  } else return null;
-  if(adminsData){
+  } else {
+    // Initialize with example user data if no data exists in localStorage
+    users = [
+      {
+        id: 1,
+        fullname: "Josh Liam",
+        email: "abc@gmail.com",
+        password: "1234",
+        role: "user",
+      },
+    ];
+    saveToLocalStorage(); // Save the example data to localStorage
+  }
+
+  if (adminsData) {
     admins = JSON.parse(adminsData);
-  } else return null;
-}
+  } else {
+    // Initialize with example admin data if no data exists in localStorage
+    admins = [
+      {
+        id: 1,
+        fullname: "admin",
+        email: "admin@gmail.com",
+        password: "1234",
+        role: "admin",
+      },
+    ];
+    saveToLocalStorage(); // Save the example data to localStorage
+  }
+};
 
 let users  = [
   // {

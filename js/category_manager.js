@@ -1,35 +1,59 @@
-let categories = [
-  {
-    id : 1,
-    categoryName : "Đời sống",
-    categoryEmoji : "🏠"
-  },
-  {
-    id : 2,
-    categoryName : "Thể thao",
-    categoryEmoji : "⚽"
-  },
-  {
-    id : 3,
-    categoryName : "Giải trí",
-    categoryEmoji : "🎮"
-  },
-  {
-    id : 4,
-    categoryName : "Công nghệ",
-    categoryEmoji : "💻"
-  },
-  {
-    id : 5,
-    categoryName : "Du lịch",
-    categoryEmoji : "✈️"
-  },
-  {
-    id : 6,
-    categoryName : "Sức khỏe",
-    categoryEmoji : "🏥"
+const saveToLocalStorage = () => {
+  localStorage.setItem("categories", JSON.stringify(categories));
+};
+
+const loadFromLocalStorage = () => {
+  const categoriesData = localStorage.getItem("categories");
+  if (categoriesData) {
+    categories = JSON.parse(categoriesData);
+  } else {
+    // Initialize with example data if no data exists in localStorage
+    categories = [
+      { id: 1, categoryName: "Đời sống", categoryEmoji: "🏠" },
+      { id: 2, categoryName: "Thể thao", categoryEmoji: "⚽" },
+      { id: 3, categoryName: "Giải trí", categoryEmoji: "🎮" },
+      { id: 4, categoryName: "Công nghệ", categoryEmoji: "💻" },
+      { id: 5, categoryName: "Du lịch", categoryEmoji: "✈️" },
+      { id: 6, categoryName: "Sức khỏe", categoryEmoji: "🏥" },
+    ];
+    saveToLocalStorage(); // Save the example data to localStorage
   }
-]
+};
+
+let categories = [
+  // {
+  //   id : 1,
+  //   categoryName : "Đời sống",
+  //   categoryEmoji : "🏠"
+  // },
+  // {
+  //   id : 2,
+  //   categoryName : "Thể thao",
+  //   categoryEmoji : "⚽"
+  // },
+  // {
+  //   id : 3,
+  //   categoryName : "Giải trí",
+  //   categoryEmoji : "🎮"
+  // },
+  // {
+  //   id : 4,
+  //   categoryName : "Công nghệ",
+  //   categoryEmoji : "💻"
+  // },
+  // {
+  //   id : 5,
+  //   categoryName : "Du lịch",
+  //   categoryEmoji : "✈️"
+  // },
+  // {
+  //   id : 6,
+  //   categoryName : "Sức khỏe",
+  //   categoryEmoji : "🏥"
+  // }
+];
+loadFromLocalStorage();
+
 
 // Function to render categories into the table body
 const renderCategories = () => {
@@ -143,6 +167,9 @@ const submitEditCategory = () => {
       categories[categoryIndex].categoryName = editCategoryName;
       categories[categoryIndex].categoryEmoji = editCategoryEmoji;
 
+      // Save to localStorage
+      saveToLocalStorage();
+
       // Re-render the categories table
       renderCategories();
 
@@ -170,6 +197,9 @@ const deleteCategory = () => {
       category.id = idx + 1; // IDs start from 1
     });
 
+    // Save to localStorage
+    saveToLocalStorage();
+    
     renderCategories();
 
     const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deleteCategoryModal"));
@@ -252,6 +282,9 @@ const addCategory = () => {
 
     // Push the new category to the array
     categories.push(newCategory);
+
+    // Save to localStorage
+    saveToLocalStorage();
 
     // Re-render the categories table
     renderCategories();
