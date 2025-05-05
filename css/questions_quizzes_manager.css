@@ -1,0 +1,11 @@
+/* Ensure the wrapper takes up the full height of the viewport */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Ensure the footer stays at the bottom */
+  footer {
+    margin-top: auto;
+  }

@@ -58,8 +58,9 @@
     <main class="container mt-5">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="m-0">Quiz Manager</h3>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addQuizModal">Add Quiz</button>
-        </div>
+        <button type="button" class="btn btn-primary" id="addQuizBtn">Add Quiz</button>
+        
+      </div>
       <div class="d-flex justify-content-end mb-3 gap-2">
         <select class="form-select w-auto">
           <option selected>Sort by</option>
@@ -172,7 +173,7 @@
           <div class="mb-3">
             <label for="addQuizCategory" class="form-label">Category</label>
             <select class="form-select" id="addQuizCategory">
-              <!-- Options will be dynamically populated -->
+              
             </select>
             <div id="add_category_error"></div>
           </div>
@@ -186,6 +187,28 @@
             <input type="number" class="form-control" id="addQuizDuration">
             <div id="add_duration_error"></div>
           </div>
+          <!-- <div class="mb-3">
+            <label for="addQuizName" class="form-label">Quiz Name</label>
+            <input type="text" class="form-control" id="addQuizName">
+          </div>
+          <div class="mb-3">
+            <label for="addQuizCategory" class="form-label">Category</label>
+            <select class="form-select" id="addQuizCategory">
+              Options will be dynamically populated
+            </select>
+          <div id="add_category_error" class="text-danger"></div>
+          </div>
+          <div class="mb-3">
+            <label for="addQuizQuestions" class="form-label text-primary">Number of Questions</label>
+            <input type="number" class="form-control" id="addQuizQuestions">
+          </div>
+          <div class="mb-3">
+            <label for="addQuizDuration" class="form-label">Duration (minutes)</label>
+            <input type="number" class="form-control" id="addQuizDuration">
+          </div>
+          <div id="questionsContainer" class="mt-4">
+            Dynamically generated questions and answers will appear here
+          </div> -->
         </form>
       </div>
       <div class="modal-footer">
@@ -219,7 +242,10 @@
             <div id="edit_category_error"></div>
           </div>
           <div class="mb-3">
-            <label for="editQuizQuestions" class="form-label">Number of Questions</label>
+            <label for="editQuizQuestions" class="form-label text-primary">Questions: </label>
+            <div id="editQuestionsContainer" class="mt-3">
+              <!-- Dynamically generated questions and answers will appear here -->
+            </div>
             <input type="number" class="form-control" id="editQuizQuestions">
             <div id="edit_questions_error"></div>
           </div>
