@@ -443,6 +443,50 @@ document.getElementById("sortDropdown").addEventListener("change", (e) => {
   }
 });
 
+// Search quizzes
+const searchQuizzes = (searchTerm) => {
+  const filteredQuizzes = quizzes.filter((quiz) =>
+    quiz.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  renderFilteredQuizzes(filteredQuizzes);
+};
+
+// Render filtered quizzes
+const renderFilteredQuizzes = (filteredQuizzes) => {
+  const tbody = document.querySelector("tbody");
+  tbody.innerHTML = "";
+
+  filteredQuizzes.forEach((quiz) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <th scope="row">${quiz.id}</th>
+      <td>${quiz.name}</td>
+      <td>${quiz.category}</td>
+      <td>${quiz.questions}</td>
+      <td>${quiz.duration} min</td>
+      <td class="text-center">
+        <button class="btn btn-sm btn-edit me-2" data-bs-toggle="modal" data-bs-target="#editQuizModal">Edit</button>
+        <button class="btn btn-sm btn-delete">Delete</button>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  addEditButtonListeners();
+  addDeleteButtonListeners();
+};
+
+// Event listener for search input
+document.querySelector("input[placeholder='Search by name']").addEventListener("input", (e) => {
+  const searchTerm = e.target.value.trim();
+  if (searchTerm) {
+    searchQuizzes(searchTerm);
+  } else {
+    renderQuizzesWithPagination(); // Render all quizzes if the search input is empty
+  }
+});
+
 // Add event listeners
 // document.getElementById("btn-submit-add").addEventListener("click", addQuiz);
 document.getElementById("btn-submit-edit").addEventListener("click", editQuiz);
