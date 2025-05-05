@@ -54,13 +54,24 @@ let categories = [
 ];
 loadFromLocalStorage();
 
+// render and pagination ============
+let currentPage = 1;
+const itemsPerPage = 5;
 
-// Function to render categories into the table body
-const renderCategories = () => {
+// Function to render categories and pagination into the table body
+const renderCategoriesWithPagination = () => {
   const tbody = document.querySelector("tbody");
   tbody.innerHTML = ""; // Clear existing rows
 
-  categories.forEach((category) => {
+  // Calculate start and end indices for the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Get the categories for the current page
+  const categoriesToDisplay = categories.slice(startIndex, endIndex);
+  
+  // Render for the current page
+  categoriesToDisplay.forEach((category) => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <th scope="row">${category.id}</th>
@@ -76,7 +87,71 @@ const renderCategories = () => {
   // Add event listeners for edit and delete buttons after rendering
   addEditButtonListeners();
   addDeleteButtonListeners();
+
+  renderPaginationControls();
 };
+
+// Function to render pagination controls
+const renderPaginationControls = () => {
+  const pagination = document.querySelector(".pagination");
+  pagination.innerHTML = ""; // Clear existing pagination
+
+  // check
+  if (categories.length === 0) {
+    return; // No pagination if there are no categories
+  }
+
+  const totalPages = Math.ceil(categories.length / itemsPerPage);
+
+  // Previous button
+  const prevButton = document.createElement("li");
+  prevButton.className = `page-item ${currentPage === 1 ? "disabled" : ""}`;
+  prevButton.innerHTML = `
+    <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+  `;
+  prevButton.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderCategoriesWithPagination();
+    }
+  });
+  pagination.appendChild(prevButton);
+
+  // Page numbers
+  for (let i = 1; i <= totalPages; i++) {
+    const pageItem = document.createElement("li");
+    pageItem.className = `page-item ${currentPage === i ? "active" : ""}`;
+    pageItem.innerHTML = `
+      <a class="page-link" href="#">${i}</a>
+    `;
+    if (currentPage !== i) {
+      pageItem.addEventListener("click", () => {
+        currentPage = i;
+        renderCategoriesWithPagination();
+      });
+    }
+    pagination.appendChild(pageItem);
+  }
+
+  // Next button
+  const nextButton = document.createElement("li");
+  nextButton.className = `page-item ${currentPage === totalPages ? "disabled" : ""}`;
+  nextButton.innerHTML = `
+    <a class="page-link" href="#">&raquo;</a>
+  `;
+  nextButton.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderCategoriesWithPagination();
+    }
+  });
+  pagination.appendChild(nextButton);
+};
+
+// Call the render function on page load
+document.addEventListener("DOMContentLoaded", () => {
+  renderCategoriesWithPagination();
+});
 
 // edit ==============
 // Function to add event listeners to edit buttons
@@ -99,11 +174,10 @@ const addEditButtonListeners = () => {
     });
   });
 };
-// Load categories when DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-  renderCategories();
-});
 
+// document.addEventListener("DOMContentLoaded", () => {
+//   renderCategoriesWithPagination();
+// });
 
 const submitEditCategory = () => {
   const editCategoryName = document.getElementById("editCategoryName").value.trim();
@@ -171,7 +245,7 @@ const submitEditCategory = () => {
       saveToLocalStorage();
 
       // Re-render the categories table
-      renderCategories();
+      renderCategoriesWithPagination();
 
       // Hide the modal
       const editModal = bootstrap.Modal.getInstance(document.getElementById("editCategoryModal"));
@@ -200,7 +274,7 @@ const deleteCategory = () => {
     // Save to localStorage
     saveToLocalStorage();
     
-    renderCategories();
+    renderCategoriesWithPagination();
 
     const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deleteCategoryModal"));
     deleteModal.hide();
@@ -287,7 +361,7 @@ const addCategory = () => {
     saveToLocalStorage();
 
     // Re-render the categories table
-    renderCategories();
+    renderCategoriesWithPagination();
 
     // Clear the input fields
     document.getElementById("addCategoryName").value = "";
@@ -300,3 +374,15 @@ const addCategory = () => {
 };
 
 document.getElementById("btn-submit-add").addEventListener("click", addCategory);
+
+// Clear error messages when the "Add Category" modal is closed
+document.getElementById("addCategoryModal").addEventListener("hidden.bs.modal", () => {
+  document.getElementById("add_name_error").innerText = "";
+  document.getElementById("add_emoji_error").innerText = "";
+});
+
+// Clear error messages when the "Edit Category" modal is closed
+document.getElementById("editCategoryModal").addEventListener("hidden.bs.modal", () => {
+  document.getElementById("edit_name_error").innerText = "";
+  document.getElementById("edit_emoji_error").innerText = "";
+});
