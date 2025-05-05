@@ -71,6 +71,98 @@ const loadFromLocalStorage = () => {
           },
         ],
       },
+      {
+        id: 3,
+        name: "fun quizz",
+        category: "Giải trí",
+        questions: 2,
+        duration: 20,
+        questionsData: [
+          {
+            question: "hi?",
+            answers: [
+              { answer: "dc", isCorrected: false },
+              { answer: "ko", isCorrected: false },
+            ],
+          },
+          {
+            question: "ba?",
+            answers: [
+              { answer: "dsdwes", isCorrected: false },
+              { answer: "ksdo", isCorrected: false },
+            ],
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "it quizz",
+        category: "Công nghệ",
+        questions: 2,
+        duration: 25,
+        questionsData: [
+          {
+            question: "hi?",
+            answers: [
+              { answer: "dc", isCorrected: false },
+              { answer: "ko", isCorrected: false },
+            ],
+          },
+          {
+            question: "ba?",
+            answers: [
+              { answer: "dsdwes", isCorrected: false },
+              { answer: "ksdo", isCorrected: false },
+            ],
+          },
+        ],
+      },
+      {
+        id: 5,
+        name: "Geography quizz",
+        category: "Du lịch",
+        questions: 2,
+        duration: 30,
+        questionsData: [
+          {
+            question: "hi?",
+            answers: [
+              { answer: "dc", isCorrected: false },
+              { answer: "ko", isCorrected: false },
+            ],
+          },
+          {
+            question: "ba?",
+            answers: [
+              { answer: "dsdwes", isCorrected: false },
+              { answer: "ksdo", isCorrected: false },
+            ],
+          },
+        ],
+      },
+      {
+        id: 6,
+        name: "Heath quizz",
+        category: "Sức khoẻ",
+        questions: 2,
+        duration: 35,
+        questionsData: [
+          {
+            question: "hi?",
+            answers: [
+              { answer: "dc", isCorrected: false },
+              { answer: "ko", isCorrected: false },
+            ],
+          },
+          {
+            question: "ba?",
+            answers: [
+              { answer: "dsdwes", isCorrected: false },
+              { answer: "ksdo", isCorrected: false },
+            ],
+          },
+        ],
+      },
     ];
     saveToLocalStorage();
   }
@@ -327,6 +419,29 @@ const deleteQuiz = (id) => {
     }
   });
 };
+
+//sort 
+const sortQuizzes = (criteria) => {
+  quizzes.sort((a, b) => {
+    if (criteria === "name" || criteria === "category") {
+      // Sort alphabetically
+      return a[criteria].localeCompare(b[criteria]);
+    } else if (criteria === "questions" || criteria === "duration") {
+      // Sort numerically
+      return a[criteria] - b[criteria];
+    }
+    return 0;
+  });
+
+  // Re-render the quizzes after sorting
+  renderQuizzesWithPagination();
+};
+document.getElementById("sortDropdown").addEventListener("change", (e) => {
+  const selectedCriteria = e.target.value;
+  if (selectedCriteria) {
+    sortQuizzes(selectedCriteria);
+  }
+});
 
 // Add event listeners
 // document.getElementById("btn-submit-add").addEventListener("click", addQuiz);
