@@ -12,10 +12,16 @@ main {
   color: #212529;
   border: none;
 }
+.btn-edit:hover {
+  background-color: #e6b800;
+}
 .btn-delete {
   background-color: #dc3545;
   color: #fff;
   border: none;
+}
+.btn-delete:hover {
+  background-color: #c82333;
 }
 .pagination .page-item .page-link {
   color: #212529;

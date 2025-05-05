@@ -107,7 +107,7 @@ const renderPaginationControls = () => {
   const prevButton = document.createElement("li");
   prevButton.className = `page-item ${currentPage === 1 ? "disabled" : ""}`;
   prevButton.innerHTML = `
-    <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+    <a class="page-link" href="#" tabindex="-1" aria-label="Previous">&laquo;</a>
   `;
   prevButton.addEventListener("click", () => {
     if (currentPage > 1) {
@@ -122,7 +122,7 @@ const renderPaginationControls = () => {
     const pageItem = document.createElement("li");
     pageItem.className = `page-item ${currentPage === i ? "active" : ""}`;
     pageItem.innerHTML = `
-      <a class="page-link" href="#">${i}</a>
+      <a class="page-link" href="#" aria-label="Page ${i}">${i}</a>
     `;
     if (currentPage !== i) {
       pageItem.addEventListener("click", () => {
@@ -137,7 +137,7 @@ const renderPaginationControls = () => {
   const nextButton = document.createElement("li");
   nextButton.className = `page-item ${currentPage === totalPages ? "disabled" : ""}`;
   nextButton.innerHTML = `
-    <a class="page-link" href="#">&raquo;</a>
+    <a class="page-link" href="#" aria-label="Next">&raquo;</a>
   `;
   nextButton.addEventListener("click", () => {
     if (currentPage < totalPages) {
@@ -250,6 +250,12 @@ const submitEditCategory = () => {
       // Hide the modal
       const editModal = bootstrap.Modal.getInstance(document.getElementById("editCategoryModal"));
       editModal.hide();
+
+      Swal.fire({
+        title: "Success!",
+        text: "Category edited successfully.",
+        icon: "success",
+      });
     }
   }
 };
@@ -278,6 +284,12 @@ const deleteCategory = () => {
 
     const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deleteCategoryModal"));
     deleteModal.hide();
+
+    Swal.fire({
+      title: "Deleted!",
+      text: "Category has been deleted.",
+      icon: "success"
+    });
   }
 };
 
@@ -370,6 +382,13 @@ const addCategory = () => {
     // Hide the modal
     const addModal = bootstrap.Modal.getInstance(document.getElementById("addCategoryModal"));
     addModal.hide();
+
+    // Show success alert
+    Swal.fire({
+      title: "Success!",
+      text: "Category added successfully.",
+      icon: "success",
+    });
   }
 };
 

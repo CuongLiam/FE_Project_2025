@@ -1,3 +1,15 @@
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  },
+});
+
 const saveToLocalStorage = () =>{
   localStorage.setItem("users", JSON.stringify(users));
   localStorage.setItem("admins", JSON.stringify(admins));
@@ -137,11 +149,30 @@ loginBtn.addEventListener("click", (e) => {
     if (user) {
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userRole", "user"); // Save role if needed
-      window.location.href = "home.html";
+      // Show success toast
+      Toast.fire({
+        icon: "success",
+        title: "Welcome, " +username,
+      });
+
+       // Redirect to home page
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 3000); // Redirect after 1 second
+
     } else if (admin) {
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userRole", "admin");
-      window.location.href = "category_manager.html";
+      
+      // Show success toast
+      Toast.fire({
+        icon: "success",
+        title: "Welcome admin, " +username,
+      });
+
+      setTimeout(() => {
+        window.location.href = "category_manager.html";
+      }, 3000);
     } else {
       usernameError.innerText = `Invalid username or password`;
     }
