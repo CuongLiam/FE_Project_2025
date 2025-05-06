@@ -1,0 +1,46 @@
+/* Rounded cards */
+.card {
+    border-radius: 8px;
+  }
+  
+  /* Header bold */
+  .card-header {
+    font-weight: bold;
+    border-bottom: none;
+  }
+  
+  /* Spacing inside card body */
+  .card-body {
+    padding: 1rem;
+  }
+  
+  /* Small nav buttons */
+  .btn-sm {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    text-align: center;
+    font-weight: 500;
+  }
+  
+  /* Active/current question */
+  .btn-primary.btn-sm {
+    background-color: #0d6efd;
+    color: #fff;
+  }
+  
+  /* Answered questions */
+  .btn-success.btn-sm {
+    background-color: #198754;
+    color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    .card-body {
+      text-align: center;
+    }
+  
+    .btn {
+      margin-bottom: 0.5rem;
+    }
+  }

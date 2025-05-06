@@ -41,7 +41,7 @@ const renderQuizzes = () => {
             </p>
           </div>
           <div class="col-auto pe-3">
-            <button class="btn btn-warning btn-sm">Play</button>
+            <button class="btn btn-warning btn-sm play-btn" data-quiz-id="${quiz.id}">Play</button>
           </div>
         </div>
       </div>
@@ -51,6 +51,15 @@ const renderQuizzes = () => {
   });
 
   renderPaginationControls(quizzes.length);
+
+  // Add event listeners to "Play" buttons
+  document.querySelectorAll(".play-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const quizId = e.target.getAttribute("data-quiz-id");
+      localStorage.setItem("selectedQuizId", quizId); // Store the selected quiz ID in localStorage
+      window.location.href = "play.html"; // Redirect to play.html
+    });
+  });
 };
 
 const renderPaginationControls = (totalQuizzes) => {
@@ -100,4 +109,22 @@ const renderPaginationControls = (totalQuizzes) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   renderQuizzes();
+
+  // Handle "Take random quiz" button
+  document.querySelector(".btn-primary").addEventListener("click", () => {
+    const quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+    if (quizzes.length === 0) {
+      alert("No quizzes available to play.");
+      return;
+    }
+
+    // Select a random quiz
+    const randomQuiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+
+    // Store the selected quiz ID in localStorage
+    localStorage.setItem("selectedQuizId", randomQuiz.id);
+
+    // Redirect to play.html
+    window.location.href = "play.html";
+  });
 });
