@@ -44,10 +44,11 @@ const addQuestion = () => {
         <div class="d-flex align-items-center mb-2">
           <input type="text" class="form-control me-2" placeholder="Enter answer">
           <input type="checkbox" class="form-check-input me-2" title="Mark as correct">
-          <button type="button" class="btn btn-danger btn-sm remove-answer">Remove</button>
+          <button type="button" class="btn btn-danger btn-sm remove-answer"><i class="fa-solid fa-trash-xmark"></i></button>
         </div>
       </div>
       <button type="button" class="btn btn-info btn-sm add-answer" data-question-id="${questionCount}">Add Answer</button>
+      <button type="button" class="btn btn-danger btn-sm remove-question" data-question-id="${questionCount}">Delete Question</button>
     `;
 
   questionsContainer.appendChild(questionDiv);
@@ -65,13 +66,35 @@ const addQuestion = () => {
     answerDiv.innerHTML = `
         <input type="text" class="form-control me-2" placeholder="Enter answer">
         <input type="checkbox" class="form-check-input me-2" title="Mark as correct">
-        <button type="button" class="btn btn-danger btn-sm remove-answer">Remove</button>
+        <button type="button" class="btn btn-danger btn-sm remove-answer"><i class="fa-solid fa-trash-xmark"></i></button>
       `;
 
     answersContainer.appendChild(answerDiv);
 
     answerDiv.querySelector(".remove-answer").addEventListener("click", () => {
       answerDiv.remove();
+    });
+  });
+
+  // Add event listener for "Delete Question" with SweetAlert confirmation
+  questionDiv.querySelector(".remove-question").addEventListener("click", () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        questionDiv.remove();
+        Swal.fire({
+          title: "Deleted!",
+          text: "The question has been deleted.",
+          icon: "success",
+        });
+      }
     });
   });
 };
