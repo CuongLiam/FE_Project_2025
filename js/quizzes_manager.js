@@ -519,7 +519,7 @@ const addEditButtonListeners = () => {
             <label for="editQuestionText_${index + 1}" class="form-label">Question ${index + 1}</label>
             <input type="text" class="form-control mb-2" id="editQuestionText_${index + 1}" value="${question.question}">
             <div id="editAnswersContainer_${index + 1}" class="mb-3">
-              <label class="form-label">Answers</label>
+              <label class="form-label text-info">Answers (check the box if the answer is correct)</label>
               ${question.answers
                 .map(
                   (answer, answerIndex) => `
@@ -528,7 +528,7 @@ const addEditButtonListeners = () => {
                     <input type="checkbox" class="form-check-input me-2" title="Mark as correct" ${
                       answer.isCorrected ? "checked" : ""
                     }>
-                    <button type="button" class="btn btn-danger btn-sm remove-answer">Remove</button>
+                    <button type="button" class="btn btn-danger btn-sm remove-answer"><i class="fa-solid fa-trash-xmark"></i></button>
                   </div>
                 `
                 )
